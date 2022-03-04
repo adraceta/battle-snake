@@ -86,13 +86,13 @@ function move(gameState) {
       console.log('snakePart: ', JSON.stringify(snakePart))
       if (index == 0 || !snakePart) return
 
-      if (snakePart.x == myHead.x - 1) {
+      if (snakePart.x == (myHead.x - 1) && myHead.y == snakePart.y) {
         possibleMoves.left = false
-      } else if (snakePart.x == myHead.x + 1) {
+      } else if (snakePart.x == (myHead.x + 1) && myHead.y == snakePart.y) {
         possibleMoves.right = false
-      } else if (snakePart.y < myHead.y - 1) {
+      } else if (snakePart.y < (myHead.y - 1) && myHead.x == snakePart.x) {
         possibleMoves.down = false
-      } else if (snakePart.y > myHead.y + 1) {
+      } else if (snakePart.y > (myHead.y + 1) && myHead.x == snakePart.x) {
         possibleMoves.up = false
       }
     })
