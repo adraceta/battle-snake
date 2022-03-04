@@ -30,7 +30,7 @@ const skipWalls = (myHead, possibleMoves) => {
     newPossibleMoves.right = false
   }
   if (myHead.x = maxPosition) {
-    newPossibleMoves.top = false
+    newPossibleMoves.up = false
   }
   if (myHead.y = maxPosition) {
     newPossibleMoves.left = false
