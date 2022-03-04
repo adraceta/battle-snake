@@ -66,9 +66,8 @@ function move(gameState) {
 
   // Step 2 - Don't hit yourself.
   // Use information in gameState to prevent your Battlesnake from colliding with itself.
-  const mybody = gameState.you.body
-  mybody.forEach(myPart => {
-
+  const myBody = gameState.you.body
+  myBody.forEach(myPart => {
     if (myPart.x < myHead.x) {
       possibleMoves.left = false
     } else if (myPart.x > myHead.x) {
@@ -80,9 +79,21 @@ function move(gameState) {
     }
   })
 
-
-  // TODO: Step 3 - Don't collide with others.
+  // Step 3 - Don't collide with others.
   // Use information in gameState to prevent your Battlesnake from colliding with others.
+  gameState.snakes.forEach(snake => {
+    snake.body.forEach(snakePart => {
+      if (snakePart.x < myHead.x) {
+        possibleMoves.left = false
+      } else if (snakePart.x > myHead.x) {
+        possibleMoves.right = false
+      } else if (snakePart.y < myHead.y) {
+        possibleMoves.down = false
+      } else if (snakePart.y > myHead.y) {
+        possibleMoves.up = false
+      }
+    })
+  })
 
   // TODO: Step 4 - Find food.
   // Use information in gameState to seek out and find food.
