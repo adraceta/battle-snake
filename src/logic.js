@@ -3,9 +3,9 @@ function info() {
     const response = {
         apiversion: "1",
         author: "",
-        color: "#888888",
-        head: "default",
-        tail: "default"
+        color: "#34a853",
+        head: "fang",
+        tail: "freckled"
     }
     return response
 }
