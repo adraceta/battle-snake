@@ -81,7 +81,7 @@ function move(gameState) {
 
   // Step 3 - Don't collide with others.
   // Use information in gameState to prevent your Battlesnake from colliding with others.
-  gameState.snakes.forEach(snake => {
+  gameState.board.snakes.forEach(snake => {
     snake.body.forEach(snakePart => {
       if (snakePart.x < myHead.x) {
         possibleMoves.left = false
