@@ -60,7 +60,6 @@ function move(gameState) {
     possibleMoves.up = false
   }
 
-  console.log('possibleMoves: ', possibleMoves)
 
 
 
@@ -83,7 +82,9 @@ function move(gameState) {
   // Use information in gameState to prevent your Battlesnake from colliding with others.
   gameState.board.snakes.forEach(snake => {
     snake.body.forEach(snakePart, index => {
-      if (index == 0) return
+      console.log('snakePart: ', snakePart)
+
+      if (index == 0 || !snakePart) return
       if (snakePart.x < myHead.x) {
         possibleMoves.left = false
       } else if (snakePart.x > myHead.x) {
@@ -101,6 +102,9 @@ function move(gameState) {
 
   // Finally, choose a move from the available safe moves.
   // TODO: Step 5 - Select a move to make based on strategy, rather than random.
+
+  console.log('possibleMoves: ', possibleMoves)
+
   const safeMoves = Object.keys(possibleMoves).filter(key => possibleMoves[key])
   const response = {
     move: safeMoves[Math.floor(Math.random() * safeMoves.length)],
