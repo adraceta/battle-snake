@@ -62,6 +62,9 @@ function move(gameState) {
   }
 
   // TODO: Step 1 - Don't hit walls.
+  console.log('headx: ', myHead.x)
+  console.log('heady: ', myHead.y)
+
   if (myHead.x = minPosition) {
     possibleMoves.left = false
   }
