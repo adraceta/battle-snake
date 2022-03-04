@@ -23,16 +23,16 @@ const maxPosition = 10
 
 const skipWalls = (myHead, possibleMoves) => {
   let newPossibleMoves = possibleMoves
-  if (myHead.x <= minPosition) {
+  if (myHead.x = minPosition) {
     newPossibleMoves.down = false
   }
-  if (myHead.y <= minPosition) {
+  if (myHead.y = minPosition) {
     newPossibleMoves.right = false
   }
-  if (myHead.x >= maxPosition) {
+  if (myHead.x = maxPosition) {
     newPossibleMoves.top = false
   }
-  if (myHead.y >= maxPosition) {
+  if (myHead.y = maxPosition) {
     newPossibleMoves.left = false
   }
 
@@ -65,6 +65,7 @@ function move(gameState) {
 
   // TODO: Step 1 - Don't hit walls.
   possibleMoves = skipWalls(myHead, possibleMoves)
+  console.log(possibleMoves)
 
   // Use information in gameState to prevent your Battlesnake from moving beyond the boundaries of the board.
   // const boardWidth = gameState.board.width
