@@ -68,16 +68,16 @@ function move(gameState) {
   console.log('headx: ', myHead.x)
   console.log('heady: ', myHead.y)
 
-  if (myHead.x = 0) {
+  if (myHead.x == 0) {
     possibleMoves.left = false
   }
-  if (myHead.y = 0) {
+  if (myHead.y == 0) {
     possibleMoves.down = false
   }
-  if (myHead.x = boardWidth) {
+  if (myHead.x == boardWidth) {
     possibleMoves.right = false
   }
-  if (myHead.y = boardHeight) {
+  if (myHead.y == boardHeight) {
     possibleMoves.up = false
   }
 
