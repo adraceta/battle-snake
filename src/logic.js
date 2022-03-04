@@ -22,18 +22,18 @@ const minPosition = 0
 const maxPosition = 10
 
 const skipWalls = (myHead, possibleMoves) => {
-  let newPossibleMoves = possibleMoves
+  let newPossibleMoves = { ...possibleMoves }
   if (myHead.x = minPosition) {
-    newPossibleMoves.left = false
+    newPossibleMoves = { ...newPossibleMoves, left: false }
   }
   if (myHead.y = minPosition) {
-    newPossibleMoves.down = false
+    newPossibleMoves = { ...newPossibleMoves, down: false }
   }
   if (myHead.x = maxPosition) {
-    newPossibleMoves.right = false
+    newPossibleMoves = { ...newPossibleMoves, right: false }
   }
   if (myHead.y = maxPosition) {
-    newPossibleMoves.up = false
+    newPossibleMoves = { ...newPossibleMoves, up: false }
   }
 
   return newPossibleMoves
