@@ -157,7 +157,7 @@ function move(gameState) {
         if (snakeIndex != 0 && index === 0) {
           const riskyMove = couldHeadsHit(myHead, snakePart)
           if (riskyMove) {
-            possibleMoves = { ...possibleMoves, [riskyMove]: false }
+            possibleMoves = { ...possibleMoves, [`${riskyMove}`]: false }
           }
         }
 
