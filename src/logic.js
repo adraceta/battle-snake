@@ -142,14 +142,14 @@ function move(gameState) {
     const closestFoodPoint = food.filter(foodPoint => distanceBetween(foodPoint, myHead) === closestFoodDistance)[0]
     const nextPointsToMove = nextPositions(myHead, possibleMoves)
     const minDistance = Math.min(...nextPointsToMove.map(nextPoint => distanceBetween(nextPoint, closestFoodPoint)))
-    console.log('minDistance', minDistance)
-    console.log('closestFoodPoint', closestFoodPoint)
-    console.log('nextPointsToMove', nextPointsToMove)
     const favoritePoint = nextPointsToMove.filter(nextPoint => distanceBetween(nextPoint, closestFoodPoint) === minDistance)[0]
-    // const favoriteDirection = favoritePoint.movement;
-    possibleMoves = { ...resetMovement, [favoritePoint.movement]: true }
-  }
+    const movesForFood = { ...resetMovement, [favoritePoint.movement]: true }
 
+    // Security check
+    if (Object.keys(movesForFood).some(key => movesForFood[key])) {
+      possibleMoves = movesForFood
+    }
+  }
 
   // Finally, choose a move from the available safe moves.
   // TODO: Step 5 - Select a move to make based on strategy, rather than random.
