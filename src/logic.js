@@ -18,6 +18,79 @@ function end(gameState) {
   console.log(`${gameState.game.id} END\n`)
 }
 
+const dodgeWalls = (myHead, possibleMoves, boardWidth, boardHeight) => {
+  const newPossibleMoves = { ...possibleMoves }
+  if (myHead.x == 0) {
+    newPossibleMoves.left = false
+  }
+  if (myHead.y == 0) {
+    newPossibleMoves.down = false
+  }
+  if (myHead.x == (boardWidth - 1)) {
+    newPossibleMoves.right = false
+  }
+  if (myHead.y == (boardHeight - 1)) {
+    newPossibleMoves.up = false
+  }
+
+  return newPossibleMoves
+}
+
+const goUp = (myHead) => {
+  return { x: myHead.x, y: myHead.y + 1 }
+}
+const goDown = (myHead) => {
+  return { x: myHead.x, y: myHead.y - 1 }
+}
+
+const goRight = (myHead) => {
+  return { x: myHead.x + 1, y: myHead.y }
+}
+
+const goLeft = (myHead) => {
+  return { x: myHead.x - 1, y: myHead.y }
+}
+
+const compareCoordinates = (positionA, positionB) => (positionA.x == positionB.x && positionA.y == positionB.y)
+
+const nextPositions = (myHead, possibleMoves) => {
+  const safeMoves = Object.keys(possibleMoves).filter(key => possibleMoves[key])
+  const nextPositionArray = []
+
+  safeMoves.forEach(safeMove => {
+
+    if (safeMove === 'up') {
+      nextPositionArray.push(goUp(myHead))
+    }
+    if (safeMove === 'down') {
+      nextPositionArray.push(goDown(myHead))
+    }
+    if (safeMove === 'left') {
+      nextPositionArray.push(goLeft(myHead))
+    }
+    if (safeMove === 'right') {
+      nextPositionArray.push(goRight(myHead))
+    }
+    return nextPositionArray
+  })
+
+
+  if (myHead.x == 0) {
+    newPossibleMoves.left = false
+  }
+  if (myHead.y == 0) {
+    newPossibleMoves.down = false
+  }
+  if (myHead.x == (boardWidth - 1)) {
+    newPossibleMoves.right = false
+  }
+  if (myHead.y == (boardHeight - 1)) {
+    newPossibleMoves.up = false
+  }
+
+  return newPossibleMoves
+}
+
 function move(gameState) {
 
   let possibleMoves = {
@@ -47,19 +120,7 @@ function move(gameState) {
 
   // Step 1 - Don't hit walls.
   // Use information in gameState to prevent your Battlesnake from moving beyond the boundaries of the board.
-  if (myHead.x == 0) {
-    possibleMoves.left = false
-  }
-  if (myHead.y == 0) {
-    possibleMoves.down = false
-  }
-  if (myHead.x == (boardWidth - 1)) {
-    possibleMoves.right = false
-  }
-  if (myHead.y == (boardHeight - 1)) {
-    possibleMoves.up = false
-  }
-
+  possibleMoves = dodgeWalls(myHead, possibleMoves, boardWidth, boardHeight)
 
 
 
@@ -84,19 +145,25 @@ function move(gameState) {
     snake.body.forEach((snakePart, index) => {
 
       console.log('snakePart: ', JSON.stringify(snakePart))
+      // First snake is my snake
       if (index == 0 || !snakePart) return
 
-      if (snakePart.x == (myHead.x - 1) && myHead.y == snakePart.y) {
-        possibleMoves.left = false
-      } else if (snakePart.x == (myHead.x + 1) && myHead.y == snakePart.y) {
-        possibleMoves.right = false
-      } else if (snakePart.y < (myHead.y - 1) && myHead.x == snakePart.x) {
-        possibleMoves.down = false
-      } else if (snakePart.y > (myHead.y + 1) && myHead.x == snakePart.x) {
+      if (compareCoordinates(snakePart, goUp(myHead))) {
         possibleMoves.up = false
+      }
+      if (compareCoordinates(snakePart, goDown(myHead))) {
+        possibleMoves.down = false
+      }
+      if (compareCoordinates(snakePart, goLeft(myHead))) {
+        possibleMoves.left = false
+      }
+      if (compareCoordinates(snakePart, goRight(myHead))) {
+        possibleMoves.right = false
       }
     })
   })
+
+  // const nextPositionArray = nextPositions(myHead, possibleMoves)
 
   // TODO: Step 4 - Find food.
   // Use information in gameState to seek out and find food.
