@@ -134,8 +134,8 @@ function move(gameState) {
     possibleMoves.up = false
   }
 
-  console.log('------------new move------------')
-  console.log('head:', `[${myHead.x},${myHead.y}]`)
+  // console.log('------------new move------------')
+  // console.log('head:', `[${myHead.x},${myHead.y}]`)
 
   // Step 1 - Don't hit walls.
   // Use information in gameState to prevent your snake from moving beyond the boundaries of the board.
@@ -149,12 +149,9 @@ function move(gameState) {
   gameState.board.snakes.forEach((snake, snakeIndex) => {
     // First snake is my snake, so step 2 & 3 are treated here
     if (snake) {
-      console.log('name: ', JSON.stringify(snake.name))
+      // console.log('name: ', JSON.stringify(snake.name))
       snake.body.forEach((snakePart, index) => {
-
-        console.log('snakePart: ', JSON.stringify(snakePart))
-
-
+        // console.log('snakePart: ', JSON.stringify(snakePart))
         if (compareCoordinates(snakePart, goUp(myHead))) {
           possibleMoves.up = false
         }
@@ -173,7 +170,7 @@ function move(gameState) {
           if (gameState.you.health <= snake.health) {
             //Play safe
             const riskyMove = couldHeadsHit(myHead, snakePart)
-            console.log('riskyMove', riskyMove)
+            // console.log('riskyMove', riskyMove)
             if (riskyMove) {
               //This check is for the case other movements are not allowed. better to crash
               if (Object.keys(possibleMoves).some(key => possibleMoves[key] && possibleMoves[key] !== riskyMove)) {
