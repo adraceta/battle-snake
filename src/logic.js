@@ -51,7 +51,7 @@ const goLeft = (myHead) => {
   return { x: myHead.x - 1, y: myHead.y }
 }
 
-const compareCoordinates = (positionA, positionB) => (positionA.x == positionB.x && positionA.y == positionB.y)
+const compareCoordinates = (positionA, positionB) => (positionA.x === positionB.x && positionA.y === positionB.y)
 
 const nextPositions = (myHead, possibleMoves) => {
   const safeMoves = Object.keys(possibleMoves).filter(key => possibleMoves[key])
@@ -142,6 +142,7 @@ function move(gameState) {
   // Step 3 - Don't collide with others.
   // Use information in gameState to prevent your Battlesnake from colliding with others.
   gameState.board.snakes.forEach(snake => {
+    console.log('name: ', JSON.stringify(snake.name))
     snake.body.forEach((snakePart, index) => {
 
       console.log('snakePart: ', JSON.stringify(snakePart))
