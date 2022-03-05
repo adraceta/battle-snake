@@ -155,7 +155,7 @@ function move(gameState) {
         console.log('snakePart: ', JSON.stringify(snakePart))
         //Careful with other snake's head
         if (snakeIndex != 0 && index === 0) {
-          if (gameState.you.health < snake.health) {
+          if (gameState.you.health <= snake.health) {
             //Play safe
             const riskyMove = couldHeadsHit(myHead, snakePart)
             console.log('riskyMove', riskyMove)
