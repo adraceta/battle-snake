@@ -140,6 +140,8 @@ function move(gameState) {
   const closestFood = Math.min(...food.map(foodPoint => distanceBetween(foodPoint, myHead)))
   const nextPointsToMove = nextPositions(myHead, possibleMoves)
   const minDistance = Math.min(...nextPointsToMove.map(nextPoint => distanceBetween(nextPoint, closestFood)))
+  console.log('minDistance', minDistance)
+  console.log('closestFood', closestFood)
   console.log('nextPointsToMove', nextPointsToMove)
   const favoritePoint = nextPointsToMove.filter(nextPoint => distanceBetween(nextPoint, closestFood) === minDistance)
   // const favoriteDirection = favoritePoint.movement;
