@@ -134,8 +134,8 @@ function move(gameState) {
     possibleMoves.up = false
   }
 
-  console.log('headx: ', myHead.x)
-  console.log('heady: ', myHead.y)
+  // console.log('headx: ', myHead.x)
+  // console.log('heady: ', myHead.y)
 
   // Step 1 - Don't hit walls.
   // Use information in gameState to prevent your snake from moving beyond the boundaries of the board.
@@ -149,10 +149,10 @@ function move(gameState) {
   gameState.board.snakes.forEach((snake, snakeIndex) => {
     // First snake is my snake, so step 2 & 3 are treated here
     if (snake) {
-      console.log('name: ', JSON.stringify(snake.name))
+      // console.log('name: ', JSON.stringify(snake.name))
       snake.body.forEach((snakePart, index) => {
 
-        console.log('snakePart: ', JSON.stringify(snakePart))
+        // console.log('snakePart: ', JSON.stringify(snakePart))
         //Careful with other snake's head
         // if (snakeIndex != 0 && index === 0) {
         //   const riskyMove = couldHeadsHit(myHead, snakePart)
@@ -198,7 +198,7 @@ function move(gameState) {
   // Finally, choose a move from the available safe moves.
   // TODO: Step 5 - Select a move to make based on strategy, rather than random.
 
-  console.log('possibleMoves: ', possibleMoves)
+  // console.log('possibleMoves: ', possibleMoves)
 
   const safeMoves = Object.keys(possibleMoves).filter(key => possibleMoves[key])
   const response = {
