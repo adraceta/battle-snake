@@ -42,10 +42,8 @@ const goRight = myHead => ({ x: myHead.x + 1, y: myHead.y })
 const goLeft = myHead => ({ x: myHead.x - 1, y: myHead.y })
 // const compareCoordinates = (positionA, positionB) => (positionA.x === positionB.x && positionA.y === positionB.y)
 const compareCoordinates = (positionA, positionB) => {
-  console.log(positionA.x)
-  console.log(positionB.x)
-  console.log(positionA.y)
-  console.log(positionB.y)
+  console.log(positionA.x, positionA.y)
+  console.log(positionB.x, positionB.y)
   console.log((positionA.x === positionB.x && positionA.y === positionB.y))
   return (positionA.x === positionB.x && positionA.y === positionB.y)
 }
@@ -62,18 +60,18 @@ const nextPositions = (myHead, possibleMoves) => {
     if (safeMove === 'down') {
       nextPositionArray.push(goDown(myHead))
     }
-    if (safeMove === 'left') {
-      nextPositionArray.push(goLeft(myHead))
-    }
     if (safeMove === 'right') {
       nextPositionArray.push(goRight(myHead))
+    }
+    if (safeMove === 'left') {
+      nextPositionArray.push(goLeft(myHead))
     }
     return nextPositionArray
   })
 
 
-  if (myHead.x == 0) {
-    newPossibleMoves.left = false
+  if (myHead.y == (boardHeight - 1)) {
+    newPossibleMoves.up = false
   }
   if (myHead.y == 0) {
     newPossibleMoves.down = false
@@ -81,8 +79,8 @@ const nextPositions = (myHead, possibleMoves) => {
   if (myHead.x == (boardWidth - 1)) {
     newPossibleMoves.right = false
   }
-  if (myHead.y == (boardHeight - 1)) {
-    newPossibleMoves.up = false
+  if (myHead.x == 0) {
+    newPossibleMoves.left = false
   }
 
   return newPossibleMoves
@@ -152,11 +150,11 @@ function move(gameState) {
         if (compareCoordinates(snakePart, goDown(myHead))) {
           possibleMoves.down = false
         }
-        if (compareCoordinates(snakePart, goLeft(myHead))) {
-          possibleMoves.left = false
-        }
         if (compareCoordinates(snakePart, goRight(myHead))) {
           possibleMoves.right = false
+        }
+        if (compareCoordinates(snakePart, goLeft(myHead))) {
+          possibleMoves.left = false
         }
       }
 
