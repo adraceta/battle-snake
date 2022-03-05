@@ -137,16 +137,18 @@ function move(gameState) {
   // TODO: Step 4 - Find food.
   // Use information in gameState to seek out and find food.
   const food = gameState.board.food
-  const closestFoodDistance = Math.min(...food.map(foodPoint => distanceBetween(foodPoint, myHead)))
-  const closestFoodPoint = food.filter(foodPoint => distanceBetween(foodPoint, myHead) === closestFoodDistance)[0]
-  const nextPointsToMove = nextPositions(myHead, possibleMoves)
-  const minDistance = Math.min(...nextPointsToMove.map(nextPoint => distanceBetween(nextPoint, closestFoodPoint)))
-  console.log('minDistance', minDistance)
-  console.log('closestFoodPoint', closestFoodPoint)
-  console.log('nextPointsToMove', nextPointsToMove)
-  const favoritePoint = nextPointsToMove.filter(nextPoint => distanceBetween(nextPoint, closestFoodPoint) === minDistance)[0]
-  // const favoriteDirection = favoritePoint.movement;
-  possibleMoves = { ...resetMovement, [favoritePoint.movement]: true }
+  if (food.length > 0) {
+    const closestFoodDistance = Math.min(...food.map(foodPoint => distanceBetween(foodPoint, myHead)))
+    const closestFoodPoint = food.filter(foodPoint => distanceBetween(foodPoint, myHead) === closestFoodDistance)[0]
+    const nextPointsToMove = nextPositions(myHead, possibleMoves)
+    const minDistance = Math.min(...nextPointsToMove.map(nextPoint => distanceBetween(nextPoint, closestFoodPoint)))
+    console.log('minDistance', minDistance)
+    console.log('closestFoodPoint', closestFoodPoint)
+    console.log('nextPointsToMove', nextPointsToMove)
+    const favoritePoint = nextPointsToMove.filter(nextPoint => distanceBetween(nextPoint, closestFoodPoint) === minDistance)[0]
+    // const favoriteDirection = favoritePoint.movement;
+    possibleMoves = { ...resetMovement, [favoritePoint.movement]: true }
+  }
 
 
   // Finally, choose a move from the available safe moves.
