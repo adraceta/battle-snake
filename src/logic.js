@@ -62,24 +62,9 @@ const nextPositions = (myHead, possibleMoves) => {
     if (safeMove === 'left') {
       nextPositionArray.push({ ...goLeft(myHead), movement: 'left' })
     }
-    return nextPositionArray
   })
+  return nextPositionArray
 
-
-  if (myHead.y == (boardHeight - 1)) {
-    newPossibleMoves.up = false
-  }
-  if (myHead.y == 0) {
-    newPossibleMoves.down = false
-  }
-  if (myHead.x == (boardWidth - 1)) {
-    newPossibleMoves.right = false
-  }
-  if (myHead.x == 0) {
-    newPossibleMoves.left = false
-  }
-
-  return newPossibleMoves
 }
 
 function move(gameState) {
