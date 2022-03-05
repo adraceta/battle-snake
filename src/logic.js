@@ -153,19 +153,7 @@ function move(gameState) {
       snake.body.forEach((snakePart, index) => {
 
         console.log('snakePart: ', JSON.stringify(snakePart))
-        //Careful with other snake's head
-        if (snakeIndex != 0 && index === 0) {
-          if (gameState.you.health <= snake.health) {
-            //Play safe
-            const riskyMove = couldHeadsHit(myHead, snakePart)
-            console.log('riskyMove', riskyMove)
-              if (riskyMove) {
-                possibleMoves = { ...possibleMoves, [`${riskyMove}`]: false }
-              }
-          } else {
-            // TODO. go aggressive 
-          }
-        }
+
 
         if (compareCoordinates(snakePart, goUp(myHead))) {
           possibleMoves.up = false
@@ -178,6 +166,23 @@ function move(gameState) {
         }
         if (compareCoordinates(snakePart, goLeft(myHead))) {
           possibleMoves.left = false
+        }
+
+        //Careful with other snake's head
+        if (snakeIndex != 0 && index === 0) {
+          if (gameState.you.health <= snake.health) {
+            //Play safe
+            const riskyMove = couldHeadsHit(myHead, snakePart)
+            console.log('riskyMove', riskyMove)
+            if (riskyMove) {
+              //This check is for the case other movements are not allowed. better to crash
+              if (Object.keys(possibleMoves).some(key => possibleMoves[key] && possibleMoves[key] !== riskyMove)) {
+                possibleMoves = { ...possibleMoves, [`${riskyMove}`]: false }
+              }
+            }
+          } else {
+            // TODO. go aggressive 
+          }
         }
       })
     }
