@@ -149,7 +149,7 @@ function move(gameState) {
   gameState.board.snakes.forEach((snake, snakeIndex) => {
     // First snake is my snake, so step 2 & 3 are treated here
     if (snake) {
-      // console.log('name: ', JSON.stringify(snake.name))
+      console.log('name: ', JSON.stringify(snake.name))
       snake.body.forEach((snakePart, index) => {
 
         console.log('snakePart: ', JSON.stringify(snakePart))
@@ -159,9 +159,9 @@ function move(gameState) {
             //Play safe
             const riskyMove = couldHeadsHit(myHead, snakePart)
             console.log('riskyMove', riskyMove)
-            //   if (riskyMove) {
-            //     possibleMoves = { ...possibleMoves, [`${riskyMove}`]: false }
-            //   }
+              if (riskyMove) {
+                possibleMoves = { ...possibleMoves, [`${riskyMove}`]: false }
+              }
           } else {
             // TODO. go aggressive 
           }
