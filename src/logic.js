@@ -137,9 +137,10 @@ function move(gameState) {
   // TODO: Step 4 - Find food.
   // Use information in gameState to seek out and find food.
   const food = gameState.board.food
-  const closestFood = Math.min(...food.map(foodPoint => distanceBetween(foodPoint, myHead)))
+  const closestFoodDistance = Math.min(...food.map(foodPoint => distanceBetween(foodPoint, myHead)))
+  const closestFoodPoint = food.filter(foodPoint => distanceBetween(foodPoint, myHead) === closestFoodDistance)
   const nextPointsToMove = nextPositions(myHead, possibleMoves)
-  const minDistance = Math.min(...nextPointsToMove.map(nextPoint => distanceBetween(nextPoint, closestFood)))
+  const minDistance = Math.min(...nextPointsToMove.map(nextPoint => distanceBetween(nextPoint, closestFoodPoint)))
   console.log('minDistance', minDistance)
   console.log('closestFood', closestFood)
   console.log('nextPointsToMove', nextPointsToMove)
