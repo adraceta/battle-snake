@@ -20,16 +20,16 @@ function end(gameState) {
 
 const dodgeWalls = (myHead, possibleMoves, boardWidth, boardHeight) => {
   const newPossibleMoves = { ...possibleMoves }
-  if (myHead.x == 0) {
+  if (myHead.x === 0) {
     newPossibleMoves.left = false
   }
-  if (myHead.y == 0) {
+  if (myHead.y === 0) {
     newPossibleMoves.down = false
   }
-  if (myHead.x == (boardWidth - 1)) {
+  if (myHead.x === (boardWidth - 1)) {
     newPossibleMoves.right = false
   }
-  if (myHead.y == (boardHeight - 1)) {
+  if (myHead.y === (boardHeight - 1)) {
     newPossibleMoves.up = false
   }
 
@@ -40,13 +40,13 @@ const goUp = myHead => ({ x: myHead.x, y: myHead.y + 1 })
 const goDown = myHead => ({ x: myHead.x, y: myHead.y - 1 })
 const goRight = myHead => ({ x: myHead.x + 1, y: myHead.y })
 const goLeft = myHead => ({ x: myHead.x - 1, y: myHead.y })
-// const compareCoordinates = (positionA, positionB) => (positionA.x === positionB.x && positionA.y === positionB.y)
-const compareCoordinates = (positionA, positionB) => {
-  console.log(positionA.x, positionA.y)
-  console.log(positionB.x, positionB.y)
-  console.log((positionA.x === positionB.x && positionA.y === positionB.y))
-  return (positionA.x === positionB.x && positionA.y === positionB.y)
-}
+const compareCoordinates = (positionA, positionB) => (positionA.x === positionB.x && positionA.y === positionB.y)
+// const compareCoordinates = (positionA, positionB) => {
+//   console.log(positionA.x, positionA.y)
+//   console.log(positionB.x, positionB.y)
+//   console.log((positionA.x === positionB.x && positionA.y === positionB.y))
+//   return (positionA.x === positionB.x && positionA.y === positionB.y)
+// }
 
 const nextPositions = (myHead, possibleMoves) => {
   const safeMoves = Object.keys(possibleMoves).filter(key => possibleMoves[key])
