@@ -134,8 +134,8 @@ function move(gameState) {
     possibleMoves.up = false
   }
 
-  // console.log('headx: ', myHead.x)
-  // console.log('heady: ', myHead.y)
+  console.log('------------new move------------')
+  console.log('head:', `[${myHead.x},${myHead.y}]`)
 
   // Step 1 - Don't hit walls.
   // Use information in gameState to prevent your snake from moving beyond the boundaries of the board.
