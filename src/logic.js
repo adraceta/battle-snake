@@ -136,12 +136,12 @@ function move(gameState) {
 
   // Step 3 - Don't collide with others.
   // Use information in gameState to prevent your Battlesnake from colliding with others.
-  gameState.board.snakes.forEach(snake => {
+  gameState.board.snakes.forEach((snake, index) => {
     console.log('name: ', JSON.stringify(snake.name))
-    snake.body.forEach((snakePart, index) => {
+    // First snake is my snake
+    if (index != 0 && snake) {
+      snake.body.forEach(snakePart => {
 
-      // First snake is my snake
-      if (index != 0 && snakePart) {
         console.log('snakePart: ', JSON.stringify(snakePart))
 
         if (compareCoordinates(snakePart, goUp(myHead))) {
@@ -156,9 +156,8 @@ function move(gameState) {
         if (compareCoordinates(snakePart, goLeft(myHead))) {
           possibleMoves.left = false
         }
-      }
-
-    })
+      })
+    }
   })
 
   // const nextPositionArray = nextPositions(myHead, possibleMoves)
