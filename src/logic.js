@@ -152,7 +152,7 @@ function move(gameState) {
       // console.log('name: ', JSON.stringify(snake.name))
       snake.body.forEach((snakePart, index) => {
 
-        // console.log('snakePart: ', JSON.stringify(snakePart))
+        console.log('snakePart: ', JSON.stringify(snakePart))
         //Careful with other snake's head
         if (snakeIndex != 0 && index === 0) {
           if (gameState.you.health < snake.health) {
