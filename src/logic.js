@@ -151,14 +151,16 @@ function move(gameState) {
     if (snake) {
       // console.log('name: ', JSON.stringify(snake.name))
       snake.body.forEach((snakePart, index) => {
-
+        
         // console.log('snakePart: ', JSON.stringify(snakePart))
         //Careful with other snake's head
+        // if (gameState.you.health < snake.health){
         // if (snakeIndex != 0 && index === 0) {
         //   const riskyMove = couldHeadsHit(myHead, snakePart)
         //   if (riskyMove) {
         //     possibleMoves = { ...possibleMoves, [`${riskyMove}`]: false }
         //   }
+        // }
         // }
 
         if (compareCoordinates(snakePart, goUp(myHead))) {
