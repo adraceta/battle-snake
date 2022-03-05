@@ -142,9 +142,9 @@ function move(gameState) {
   const nextPointsToMove = nextPositions(myHead, possibleMoves)
   const minDistance = Math.min(...nextPointsToMove.map(nextPoint => distanceBetween(nextPoint, closestFoodPoint)))
   console.log('minDistance', minDistance)
-  console.log('closestFood', closestFood)
+  console.log('closestFoodPoint', closestFoodPoint)
   console.log('nextPointsToMove', nextPointsToMove)
-  const favoritePoint = nextPointsToMove.filter(nextPoint => distanceBetween(nextPoint, closestFood) === minDistance)
+  const favoritePoint = nextPointsToMove.filter(nextPoint => distanceBetween(nextPoint, closestFoodPoint) === minDistance)
   // const favoriteDirection = favoritePoint.movement;
   possibleMoves = { ...resetMovement, [favoritePoint.movement]: true }
 
