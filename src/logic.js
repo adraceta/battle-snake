@@ -43,6 +43,43 @@ const goLeft = myHead => ({ x: myHead.x - 1, y: myHead.y })
 const compareCoordinates = (positionA, positionB) => (positionA.x === positionB.x && positionA.y === positionB.y)
 const distanceBetween = (positionA, positionB) => (Math.abs(positionA.x - positionB.x) + Math.abs(positionA.y - positionB.y))
 
+const couldHeadsHit = (headA, headB) => {
+  if (compareCoordinates(goUp(headA), goUp(headB))) {
+    return 'up'
+  } else if (compareCoordinates(goUp(headA), goDown(headB))) {
+    return 'up'
+  } else if (compareCoordinates(goUp(headA), goRight(headB))) {
+    return 'up'
+  } else if (compareCoordinates(goUp(headA), goLeft(headB))) {
+    return 'up'
+  } else if (compareCoordinates(goDown(headA), goUp(headB))) {
+    return 'down'
+  } else if (compareCoordinates(goDown(headA), goDown(headB))) {
+    return 'down'
+  } else if (compareCoordinates(goDown(headA), goRight(headB))) {
+    return 'down'
+  } else if (compareCoordinates(goDown(headA), goLeft(headB))) {
+    return 'down'
+  } else if (compareCoordinates(goRight(headA), goUp(headB))) {
+    return 'right'
+  } else if (compareCoordinates(goRight(headA), goDown(headB))) {
+    return 'right'
+  } else if (compareCoordinates(goRight(headA), goRight(headB))) {
+    return 'right'
+  } else if (compareCoordinates(goRight(headA), goLeft(headB))) {
+    return 'right'
+  } else if (compareCoordinates(goLeft(headA), goUp(headB))) {
+    return 'left'
+  } else if (compareCoordinates(goLeft(headA), goDown(headB))) {
+    return 'left'
+  } else if (compareCoordinates(goLeft(headA), goRight(headB))) {
+    return 'left'
+  } else if (compareCoordinates(goLeft(headA), goLeft(headB))) {
+    return 'left'
+  }
+  return false
+}
+
 
 const nextPositions = (myHead, possibleMoves) => {
   const safeMoves = Object.keys(possibleMoves).filter(key => possibleMoves[key])
@@ -109,13 +146,20 @@ function move(gameState) {
   // Use information in gameState to prevent your snake from colliding with itself.
   // Step 3 - Don't collide with others.
   // Use information in gameState to prevent your snake from colliding with others.
-  gameState.board.snakes.forEach(snake => {
+  gameState.board.snakes.forEach((snake, snakeIndex) => {
     // First snake is my snake, so step 2 & 3 are treated here
     if (snake) {
       console.log('name: ', JSON.stringify(snake.name))
-      snake.body.forEach(snakePart => {
+      snake.body.forEach((snakePart, index) => {
 
         console.log('snakePart: ', JSON.stringify(snakePart))
+        //Careful with other snake's head
+        if (snakeIndex != 0 && index === 0) {
+          const riskyMove = couldHeadsHit(myHead, snakePart)
+          if (riskyMove) {
+            possibleMoves = { ...possibleMoves, [riskyMove]: false }
+          }
+        }
 
         if (compareCoordinates(snakePart, goUp(myHead))) {
           possibleMoves.up = false
