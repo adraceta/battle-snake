@@ -36,22 +36,19 @@ const dodgeWalls = (myHead, possibleMoves, boardWidth, boardHeight) => {
   return newPossibleMoves
 }
 
-const goUp = (myHead) => {
-  return { x: myHead.x, y: myHead.y + 1 }
+const goUp = myHead => ({ x: myHead.x, y: myHead.y + 1 })
+const goDown = myHead => ({ x: myHead.x, y: myHead.y - 1 })
+const goRight = myHead => ({ x: myHead.x + 1, y: myHead.y })
+const goLeft = myHead => ({ x: myHead.x - 1, y: myHead.y })
+// const compareCoordinates = (positionA, positionB) => (positionA.x === positionB.x && positionA.y === positionB.y)
+const compareCoordinates = (positionA, positionB) => {
+  console.log(positionA.x)
+  console.log(positionB.x)
+  console.log(positionA.y)
+  console.log(positionB.y)
+  console.log((positionA.x === positionB.x && positionA.y === positionB.y))
+  return (positionA.x === positionB.x && positionA.y === positionB.y)
 }
-const goDown = (myHead) => {
-  return { x: myHead.x, y: myHead.y - 1 }
-}
-
-const goRight = (myHead) => {
-  return { x: myHead.x + 1, y: myHead.y }
-}
-
-const goLeft = (myHead) => {
-  return { x: myHead.x - 1, y: myHead.y }
-}
-
-const compareCoordinates = (positionA, positionB) => (positionA.x === positionB.x && positionA.y === positionB.y)
 
 const nextPositions = (myHead, possibleMoves) => {
   const safeMoves = Object.keys(possibleMoves).filter(key => possibleMoves[key])
@@ -145,22 +142,24 @@ function move(gameState) {
     console.log('name: ', JSON.stringify(snake.name))
     snake.body.forEach((snakePart, index) => {
 
-      console.log('snakePart: ', JSON.stringify(snakePart))
       // First snake is my snake
-      if (index == 0 || !snakePart) return
+      if (index != 0 && snakePart) {
+        console.log('snakePart: ', JSON.stringify(snakePart))
 
-      if (compareCoordinates(snakePart, goUp(myHead))) {
-        possibleMoves.up = false
+        if (compareCoordinates(snakePart, goUp(myHead))) {
+          possibleMoves.up = false
+        }
+        if (compareCoordinates(snakePart, goDown(myHead))) {
+          possibleMoves.down = false
+        }
+        if (compareCoordinates(snakePart, goLeft(myHead))) {
+          possibleMoves.left = false
+        }
+        if (compareCoordinates(snakePart, goRight(myHead))) {
+          possibleMoves.right = false
+        }
       }
-      if (compareCoordinates(snakePart, goDown(myHead))) {
-        possibleMoves.down = false
-      }
-      if (compareCoordinates(snakePart, goLeft(myHead))) {
-        possibleMoves.left = false
-      }
-      if (compareCoordinates(snakePart, goRight(myHead))) {
-        possibleMoves.right = false
-      }
+
     })
   })
 
